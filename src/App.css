@@ -5,6 +5,7 @@
     display: inline-flex;
     flex-direction: column;
     font-family: "Roboto", sans-serif;
+    align-items: center;
 }
 
 h4 {
