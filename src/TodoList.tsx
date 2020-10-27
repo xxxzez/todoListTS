@@ -23,14 +23,25 @@ function TodoList(props: PropsType) {
                 {props.tasks.map((task) => {
                     return (
                         <li key={task.id}>
-                            <input type="checkbox" checked={task.isDone} />
-                            <span>{task.title}</span>
-                            <button
-                                className="waves-effect waves-light btn"
-                                onClick={() => props.removeTask(task.id)}
-                            >
-                                X
-                            </button>
+                            <div className="taskItem">
+                                <div>
+                                    <input
+                                        type="checkbox"
+                                        checked={task.isDone}
+                                    />
+                                    <span>{task.title}</span>
+                                </div>
+                                <div>
+                                    <button
+                                        className="waves-effect waves-light btn"
+                                        onClick={() =>
+                                            props.removeTask(task.id)
+                                        }
+                                    >
+                                        X
+                                    </button>
+                                </div>
+                            </div>
                         </li>
                     )
                 })}

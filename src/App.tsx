@@ -18,7 +18,7 @@ function App() {
         { id: 4, title: "Hooks", isDone: false },
         { id: 5, title: "TypeScript", isDone: true },
         { id: 6, title: "Redux", isDone: false },
-        { id: 7, title: "Angular", isDone: true },
+        { id: 7, title: "Прочитать много всего нового интересного", isDone: false },
     ])
     const [filter, setFilter] = useState<FilterValuesType>("all")
 

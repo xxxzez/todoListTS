@@ -18,10 +18,12 @@ h4 {
     border-radius: 15px;
 }
 .todoList {
+    width: 350px;
     margin: 40px;
-    padding-left: 10px;
+    padding: 0 10px;
     background-color: white;
     border-radius: 20px;
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 1);
 }
 .todoLists ul li {
     padding: 5px;
@@ -30,6 +32,12 @@ h4 {
     margin: 10px;
 }
 
-button {
-    margin-left: 10px;
+.filterButtons button {
+    margin: 5px;
+}
+
+
+.taskItem {
+    display: flex;
+    justify-content: space-between;
 }
