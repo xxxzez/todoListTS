@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { ChangeEvent, KeyboardEvent, useState } from "react"
 import "./App.css"
 import { TaskType, FilterValuesType } from "./App"
 
@@ -10,23 +10,31 @@ type PropsType = {
     addTask: (title: string) => void
 }
 
-
-
 function TodoList(props: PropsType) {
     const [title, setTitle] = useState("")
     const addNewTaskTitle = () => {
         props.addTask(title)
-        setTitle('')
+        setTitle("")
     }
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+        setTitle(e.currentTarget.value)
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.charCode === 13) {
+            addNewTaskTitle()
+        }
+    }
+    const onAllClickHandler = () => props.changeFilter("all")
+    const onCompletedClickHandler = () => props.changeFilter("completed")
+    const onActiveClickHandler = () => props.changeFilter("active")
+
     return (
         <div className="todoList">
             <h5>{props.title}</h5>
             <div>
                 <input
                     value={title}
-                    onChange={(e) => {
-                        setTitle(e.currentTarget.value)
-                    }}
+                    onChange={onChangeHandler}
+                    onKeyPress={onKeyPressHandler}
                 />
                 <button
                     className="waves-effect waves-light btn"
@@ -37,6 +45,7 @@ function TodoList(props: PropsType) {
             </div>
             <ul>
                 {props.tasks.map((task) => {
+                    const onClickHandler = () => props.removeTask(task.id)
                     return (
                         <li key={task.id}>
                             <div className="taskItem">
@@ -50,9 +59,7 @@ function TodoList(props: PropsType) {
                                 <div>
                                     <button
                                         className="waves-effect waves-light btn"
-                                        onClick={() =>
-                                            props.removeTask(task.id)
-                                        }
+                                        onClick={onClickHandler}
                                     >
                                         X
                                     </button>
@@ -65,25 +72,19 @@ function TodoList(props: PropsType) {
             <div className="filterButtons">
                 <button
                     className="waves-effect waves-light btn"
-                    onClick={() => {
-                        props.changeFilter("all")
-                    }}
+                    onClick={onAllClickHandler}
                 >
                     All
                 </button>
                 <button
                     className="waves-effect waves-light btn"
-                    onClick={() => {
-                        props.changeFilter("active")
-                    }}
+                    onClick={onActiveClickHandler}
                 >
                     Active
                 </button>
                 <button
                     className="waves-effect waves-light btn"
-                    onClick={() => {
-                        props.changeFilter("completed")
-                    }}
+                    onClick={onCompletedClickHandler}
                 >
                     Completed
                 </button>
