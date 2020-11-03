@@ -1,6 +1,6 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react"
-import "./App.css"
-import { TaskType, FilterValuesType } from "./App"
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import './App.css'
+import { TaskType, FilterValuesType } from './App'
 
 type PropsType = {
     title: string
@@ -12,21 +12,27 @@ type PropsType = {
 }
 
 function TodoList(props: PropsType) {
-    const [title, setTitle] = useState<string>("")
+    const [title, setTitle] = useState<string>('')
+    const [error, setError] = useState<string | null>(null)
     const addNewTaskTitle = () => {
-        props.addTask(title)
-        setTitle("")
+        if (title.trim() !== '') {
+            props.addTask(title)
+            setTitle('')
+        } else {
+            setError('Title is required')
+        }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
         setTitle(e.currentTarget.value)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
         if (e.charCode === 13) {
             addNewTaskTitle()
         }
     }
-    const onAllClickHandler = () => props.changeFilter("all")
-    const onCompletedClickHandler = () => props.changeFilter("completed")
-    const onActiveClickHandler = () => props.changeFilter("active")
+    const onAllClickHandler = () => props.changeFilter('all')
+    const onCompletedClickHandler = () => props.changeFilter('completed')
+    const onActiveClickHandler = () => props.changeFilter('active')
 
     const tasks = props.tasks.map((task) => {
         const onClickHandler = () => props.removeTask(task.id)
@@ -36,14 +42,14 @@ function TodoList(props: PropsType) {
         return (
             <li key={task.id}>
                 <div className="taskItem">
-                    <div>
+                    <label>
                         <input
                             type="checkbox"
                             checked={task.isDone}
                             onChange={changeCheckbox}
                         />
                         <span>{task.title}</span>
-                    </div>
+                    </label>
                     <div>
                         <button
                             className="waves-effect waves-light btn"
@@ -65,6 +71,7 @@ function TodoList(props: PropsType) {
                     onChange={onChangeHandler}
                     onKeyPress={onKeyPressHandler}
                 />
+                {error && <div className="errorMessage">{error}</div>}
                 <button
                     className="waves-effect waves-light btn"
                     onClick={addNewTaskTitle}
@@ -72,6 +79,7 @@ function TodoList(props: PropsType) {
                     Add task
                 </button>
             </div>
+
             <ul>{tasks}</ul>
             <div className="filterButtons">
                 <button

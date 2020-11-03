@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { v1 } from "uuid"
-import "./App.css"
-import TodoList from "./TodoList"
+import React, { useState } from 'react'
+import { v1 } from 'uuid'
+import './App.css'
+import TodoList from './TodoList'
 
 export type TaskType = {
     id: string
@@ -9,18 +9,18 @@ export type TaskType = {
     isDone: boolean
 }
 
-export type FilterValuesType = "all" | "active" | "completed"
+export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
     const [tasks, setTasks] = useState<Array<TaskType>>([
-        { id: v1(), title: "React", isDone: false },
-        { id: v1(), title: "HTML", isDone: true },
-        { id: v1(), title: "CSS", isDone: true },
-        { id: v1(), title: "Hooks", isDone: false },
-        { id: v1(), title: "TypeScript", isDone: true },
-        { id: v1(), title: "Redux", isDone: false },
+        { id: v1(), title: 'React', isDone: false },
+        { id: v1(), title: 'HTML', isDone: true },
+        { id: v1(), title: 'CSS', isDone: true },
+        { id: v1(), title: 'Hooks', isDone: false },
+        { id: v1(), title: 'TypeScript', isDone: true },
+        { id: v1(), title: 'Redux', isDone: false },
     ])
-    const [filter, setFilter] = useState<FilterValuesType>("all")
+    const [filter, setFilter] = useState<FilterValuesType>('all')
 
     const removeTask = (taskID: string) => {
         const filteredTasks = tasks.filter((task) => task.id !== taskID)
@@ -42,9 +42,9 @@ function App() {
     }
 
     let tasksForTodoList = tasks
-    if (filter === "active") {
+    if (filter === 'active') {
         tasksForTodoList = tasks.filter((task) => task.isDone === false)
-    } else if (filter === "completed") {
+    } else if (filter === 'completed') {
         tasksForTodoList = tasks.filter((task) => task.isDone === true)
     }
 
@@ -62,7 +62,7 @@ function App() {
 
             <div className="todoLists">
                 <TodoList
-                    title={"What to learn"}
+                    title={'What to learn'}
                     tasks={tasksForTodoList}
                     removeTask={removeTask}
                     changeFilter={changeFilter}
