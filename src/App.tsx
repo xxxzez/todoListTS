@@ -48,6 +48,14 @@ function App() {
         tasksForTodoList = tasks.filter((task) => task.isDone === true)
     }
 
+    const changeTaskStatus = (id: string, isDone: boolean) => {
+        const task: TaskType | undefined = tasks.find((task) => task.id === id)
+        if (task) {
+            task.isDone = isDone
+            setTasks([...tasks])
+        }
+    }
+
     return (
         <div className="App">
             <h4>My TodoLists</h4>
@@ -59,6 +67,7 @@ function App() {
                     removeTask={removeTask}
                     changeFilter={changeFilter}
                     addTask={addTask}
+                    changeTaskStatus={changeTaskStatus}
                 />
             </div>
         </div>

@@ -8,10 +8,11 @@ type PropsType = {
     removeTask: (taskID: string) => void
     changeFilter: (newFilterValue: FilterValuesType) => void
     addTask: (title: string) => void
+    changeTaskStatus: (id: string, isDone: boolean) => void
 }
 
 function TodoList(props: PropsType) {
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState<string>("")
     const addNewTaskTitle = () => {
         props.addTask(title)
         setTitle("")
@@ -27,6 +28,34 @@ function TodoList(props: PropsType) {
     const onCompletedClickHandler = () => props.changeFilter("completed")
     const onActiveClickHandler = () => props.changeFilter("active")
 
+    const tasks = props.tasks.map((task) => {
+        const onClickHandler = () => props.removeTask(task.id)
+        const changeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+            props.changeTaskStatus(task.id, e.currentTarget.checked)
+        }
+        return (
+            <li key={task.id}>
+                <div className="taskItem">
+                    <div>
+                        <input
+                            type="checkbox"
+                            checked={task.isDone}
+                            onChange={changeCheckbox}
+                        />
+                        <span>{task.title}</span>
+                    </div>
+                    <div>
+                        <button
+                            className="waves-effect waves-light btn"
+                            onClick={onClickHandler}
+                        >
+                            X
+                        </button>
+                    </div>
+                </div>
+            </li>
+        )
+    })
     return (
         <div className="todoList">
             <h5>{props.title}</h5>
@@ -43,32 +72,7 @@ function TodoList(props: PropsType) {
                     Add task
                 </button>
             </div>
-            <ul>
-                {props.tasks.map((task) => {
-                    const onClickHandler = () => props.removeTask(task.id)
-                    return (
-                        <li key={task.id}>
-                            <div className="taskItem">
-                                <div>
-                                    <input
-                                        type="checkbox"
-                                        checked={task.isDone}
-                                    />
-                                    <span>{task.title}</span>
-                                </div>
-                                <div>
-                                    <button
-                                        className="waves-effect waves-light btn"
-                                        onClick={onClickHandler}
-                                    >
-                                        X
-                                    </button>
-                                </div>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
+            <ul>{tasks}</ul>
             <div className="filterButtons">
                 <button
                     className="waves-effect waves-light btn"
