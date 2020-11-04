@@ -40,13 +40,14 @@ function TodoList(props: PropsType) {
             props.changeTaskStatus(task.id, e.currentTarget.checked)
         }
         return (
-            <li key={task.id}>
+            <li key={task.id} >
                 <div className="taskItem">
-                    <label>
+                    <label className={task.isDone ? 'is-done' : ''}>
                         <input
                             type="checkbox"
                             checked={task.isDone}
                             onChange={changeCheckbox}
+                            
                         />
                         <span>{task.title}</span>
                     </label>
@@ -70,8 +71,9 @@ function TodoList(props: PropsType) {
                     value={title}
                     onChange={onChangeHandler}
                     onKeyPress={onKeyPressHandler}
+                    
                 />
-                {error && <div className="errorMessage">{error}</div>}
+                {error && <div className="error-message">{error}</div>}
                 <button
                     className="waves-effect waves-light btn"
                     onClick={addNewTaskTitle}
