@@ -38,7 +38,9 @@ function TodoList(props: PropsType) {
     const onCompletedClickHandler = () =>
         props.changeFilter('completed', props.id)
     const onActiveClickHandler = () => props.changeFilter('active', props.id)
-    const onDeleteTodoListButton = () => {props.removeTodoList(props.id)}
+    const deleteTodoList = () => {
+        props.removeTodoList(props.id)
+    }
     const tasks = props.tasks.map((task) => {
         const onClickHandler = () => props.removeTask(task.id, props.id)
         const changeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,12 +71,16 @@ function TodoList(props: PropsType) {
     })
     return (
         <div className="todoList">
-            <span><h5>{props.title}</h5></span>
-            <span><button
-                className="waves-effect waves-light btn"
-                onClick={onDeleteTodoListButton}
-            >X</button></span>
-            
+            <div className="taskItem">
+                <h5>{props.title}</h5>
+                <button
+                    className="waves-effect waves-light btn"
+                    onClick={deleteTodoList}
+                >
+                    X
+                </button>
+            </div>
+
             <div>
                 <input
                     value={title}

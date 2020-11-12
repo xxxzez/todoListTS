@@ -59,15 +59,15 @@ function App() {
     }
 
     const removeTodoList = (id: string) => {
-        setTodoLists(todoLists.filter(tl => tl.id !== id))
+        setTodoLists(todoLists.filter((tl) => tl.id !== id))
         delete tasks[id]
-        setTasks({...tasks})
+        setTasks({ ...tasks })
     }
 
     type TodoListsType = {
         id: string
         title: string
-        filter: string
+        filter: FilterValuesType
     }
 
     const todoList1 = v1()
@@ -118,7 +118,6 @@ function App() {
                     }
                     return (
                         <TodoList
-                            
                             key={tl.id}
                             filter={tl.filter}
                             id={tl.id}
