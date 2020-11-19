@@ -16,24 +16,6 @@ type PropsType = {
 }
 
 function TodoList(props: PropsType) {
-    const [title, setTitle] = useState<string>('')
-    const [error, setError] = useState<string | null>(null)
-    const addNewTaskTitle = () => {
-        if (title.trim() !== '') {
-            props.addTask(title, props.id)
-            setTitle('')
-        } else {
-            setError('Title is required')
-        }
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
-        setTitle(e.currentTarget.value)
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
-        if (e.charCode === 13) {
-            addNewTaskTitle()
-        }
-    }
     const onAllClickHandler = () => props.changeFilter('all', props.id)
     const onCompletedClickHandler = () =>
         props.changeFilter('completed', props.id)
@@ -81,21 +63,6 @@ function TodoList(props: PropsType) {
                 </button>
             </div>
 
-            <div>
-                <input
-                    value={title}
-                    onChange={onChangeHandler}
-                    onKeyPress={onKeyPressHandler}
-                />
-                {error && <div className="error-message">{error}</div>}
-                <button
-                    className="waves-effect waves-light btn"
-                    onClick={addNewTaskTitle}
-                >
-                    Add task
-                </button>
-            </div>
-
             <ul>{tasks}</ul>
             <div className="filterButtons">
                 <button
@@ -117,6 +84,45 @@ function TodoList(props: PropsType) {
                     Completed
                 </button>
             </div>
+        </div>
+    )
+}
+
+type AddItemFormPropsType = {}
+
+const AddItemForm = (props: AddItemFormPropsType) => {
+    const [title, setTitle] = useState<string>('')
+    const [error, setError] = useState<string | null>(null)
+    const addNewTaskTitle = () => {
+        if (title.trim() !== '') {
+            props.addTask(title, props.id)
+            setTitle('')
+        } else {
+            setError('Title is required')
+        }
+    }
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
+        setTitle(e.currentTarget.value)
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        setError(null)
+        if (e.charCode === 13) {
+            addNewTaskTitle()
+        }
+    }
+    return (
+        <div>
+            <input
+                value={title}
+                onChange={onChangeHandler}
+                onKeyPress={onKeyPressHandler}
+            />
+            {error && <div className="error-message">{error}</div>}
+            <button
+                className="waves-effect waves-light btn"
+                onClick={addNewTaskTitle}
+            >
+                Add task
+            </button>
         </div>
     )
 }
