@@ -62,7 +62,7 @@ function TodoList(props: PropsType) {
                             className="waves-effect waves-light btn"
                             onClick={onClickHandler}
                         >
-                            del
+                            x
                         </button>
                     </div>
                 </div>
@@ -77,7 +77,7 @@ function TodoList(props: PropsType) {
                     className="waves-effect waves-light btn"
                     onClick={deleteTodoList}
                 >
-                    X
+                    x
                 </button>
             </div>
 
