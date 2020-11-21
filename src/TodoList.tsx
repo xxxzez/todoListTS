@@ -88,7 +88,9 @@ function TodoList(props: PropsType) {
     )
 }
 
-type AddItemFormPropsType = {}
+type AddItemFormPropsType = {
+    addTask: (title: string, id: string) => void
+}
 
 const AddItemForm = (props: AddItemFormPropsType) => {
     const [title, setTitle] = useState<string>('')
