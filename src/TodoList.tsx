@@ -97,7 +97,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
     const [error, setError] = useState<string | null>(null)
     const addItem = () => {
         if (title.trim() !== '') {
-            props.addTask(title)
+            props.addTask(title, props.id)
             setTitle('')
         } else {
             setError('Title is required')
@@ -121,7 +121,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
             {error && <div className="error-message">{error}</div>}
             <button
                 className="waves-effect waves-light btn"
-                onClick={addNewTaskTitle}
+                onClick={AddItemForm}
             >
                 Add task
             </button>
