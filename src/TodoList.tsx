@@ -95,9 +95,9 @@ type AddItemFormPropsType = {
 const AddItemForm = (props: AddItemFormPropsType) => {
     const [title, setTitle] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
-    const addNewTaskTitle = () => {
+    const addItem = () => {
         if (title.trim() !== '') {
-            props.addTask(title, props.id)
+            props.addTask(title)
             setTitle('')
         } else {
             setError('Title is required')
@@ -108,7 +108,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null)
         if (e.charCode === 13) {
-            addNewTaskTitle()
+            addItem()
         }
     }
     return (
