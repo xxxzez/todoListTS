@@ -89,7 +89,7 @@ function TodoList(props: PropsType) {
 }
 
 type AddItemFormPropsType = {
-    addTask: (title: string, id: string) => void
+    addItem: (title: string) => void
 }
 
 const AddItemForm = (props: AddItemFormPropsType) => {
@@ -97,7 +97,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
     const [error, setError] = useState<string | null>(null)
     const addItem = () => {
         if (title.trim() !== '') {
-            props.addTask(title, props.id)
+            props.addItem(title)
             setTitle('')
         } else {
             setError('Title is required')
@@ -121,7 +121,7 @@ const AddItemForm = (props: AddItemFormPropsType) => {
             {error && <div className="error-message">{error}</div>}
             <button
                 className="waves-effect waves-light btn"
-                onClick={AddItemForm}
+                onClick={addItem}
             >
                 Add task
             </button>
