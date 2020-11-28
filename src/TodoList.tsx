@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import './App.css'
 import { TaskType, FilterValuesType } from './App'
 import { AddItemForm } from './AddItemForm'
@@ -26,6 +26,14 @@ function TodoList(props: PropsType) {
     }
     const addTask = (title: string) => {
         props.addTask(title, props.id)
+    }
+
+    const EditableSpan = () => {
+        const [editMode, setEditMode] = useState(false)
+        return editMode
+        ? <input value={props.title} />
+        : <span onDoubleClick={()=> setEditMode(true)}>{props.title}</span>
+        
     }
     const tasks = props.tasks.map((task) => {
         const onClickHandler = () => props.removeTask(task.id, props.id)
@@ -58,7 +66,9 @@ function TodoList(props: PropsType) {
     return (
         <div className="todoList">
             <div className="taskItem">
-                <h5>{props.title}</h5>
+                <h5>
+                    <EditableSpan />
+                </h5>
                 <button
                     className="waves-effect waves-light btn"
                     onClick={deleteTodoList}
