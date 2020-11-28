@@ -30,10 +30,19 @@ function TodoList(props: PropsType) {
 
     const EditableSpan = () => {
         const [editMode, setEditMode] = useState(false)
-        return editMode
-        ? <input value={props.title} />
-        : <span onDoubleClick={()=> setEditMode(true)}>{props.title}</span>
-        
+        const [title, setTitle] = useState(props.title)
+        const changeTitle = () => {
+            
+        }
+        const activateViewMode = () => {
+            setEditMode(false)
+            setTitle(props.title)
+        }
+        return editMode ? (
+            <input value={props.title} autoFocus onChange={changeTitle} onBlur={activateViewMode} />
+        ) : (
+            <span  onClick={() => setEditMode(true)} >{props.title}</span>
+        )
     }
     const tasks = props.tasks.map((task) => {
         const onClickHandler = () => props.removeTask(task.id, props.id)
