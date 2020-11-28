@@ -31,17 +31,21 @@ function TodoList(props: PropsType) {
     const EditableSpan = () => {
         const [editMode, setEditMode] = useState(false)
         const [title, setTitle] = useState(props.title)
-        const changeTitle = () => {
-            
+        const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
+            setTitle(e.currentTarget.value)
         }
         const activateViewMode = () => {
             setEditMode(false)
-            setTitle(props.title)
         }
         return editMode ? (
-            <input value={props.title} autoFocus onChange={changeTitle} onBlur={activateViewMode} />
+            <input
+                value={title}
+                autoFocus
+                onChange={changeTitle}
+                onBlur={activateViewMode}
+            />
         ) : (
-            <span  onClick={() => setEditMode(true)} >{props.title}</span>
+            <span onClick={() => setEditMode(true)}>{title}</span>
         )
     }
     const tasks = props.tasks.map((task) => {
@@ -58,8 +62,9 @@ function TodoList(props: PropsType) {
                             checked={task.isDone}
                             onChange={changeCheckbox}
                         />
-                        <span>{task.title}</span>
+                        
                     </label>
+                    <EditableSpan />
                     <div>
                         <button
                             className="waves-effect waves-light btn"
