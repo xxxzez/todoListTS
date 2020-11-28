@@ -1,6 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import './App.css'
 import { TaskType, FilterValuesType } from './App'
+import { AddItemForm } from './AddItemForm'
 
 type PropsType = {
     key: string
@@ -22,6 +23,9 @@ function TodoList(props: PropsType) {
     const onActiveClickHandler = () => props.changeFilter('active', props.id)
     const deleteTodoList = () => {
         props.removeTodoList(props.id)
+    }
+    const addTask = (title: string) => {
+        props.addTask(title, props.id)
     }
     const tasks = props.tasks.map((task) => {
         const onClickHandler = () => props.removeTask(task.id, props.id)
@@ -62,7 +66,7 @@ function TodoList(props: PropsType) {
                     x
                 </button>
             </div>
-
+            <AddItemForm addItem={addTask} />
             <ul>{tasks}</ul>
             <div className="filterButtons">
                 <button
@@ -84,47 +88,6 @@ function TodoList(props: PropsType) {
                     Completed
                 </button>
             </div>
-        </div>
-    )
-}
-
-type AddItemFormPropsType = {
-    addItem: (title: string) => void
-}
-
-const AddItemForm = (props: AddItemFormPropsType) => {
-    const [title, setTitle] = useState<string>('')
-    const [error, setError] = useState<string | null>(null)
-    const addItem = () => {
-        if (title.trim() !== '') {
-            props.addItem(title)
-            setTitle('')
-        } else {
-            setError('Title is required')
-        }
-    }
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
-        setTitle(e.currentTarget.value)
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
-        if (e.charCode === 13) {
-            addItem()
-        }
-    }
-    return (
-        <div>
-            <input
-                value={title}
-                onChange={onChangeHandler}
-                onKeyPress={onKeyPressHandler}
-            />
-            {error && <div className="error-message">{error}</div>}
-            <button
-                className="waves-effect waves-light btn"
-                onClick={addItem}
-            >
-                Add task
-            </button>
         </div>
     )
 }
