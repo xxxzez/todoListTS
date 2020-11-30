@@ -62,7 +62,6 @@ function TodoList(props: PropsType) {
                             checked={task.isDone}
                             onChange={changeCheckbox}
                         />
-                        
                     </label>
                     <EditableSpan />
                     <div>
@@ -78,7 +77,7 @@ function TodoList(props: PropsType) {
         )
     })
     return (
-        <div className="todoList">
+        <div className="todoL ist">
             <div className="taskItem">
                 <h5>
                     <EditableSpan />
