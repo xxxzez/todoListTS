@@ -77,7 +77,7 @@ function TodoList(props: PropsType) {
         )
     })
     return (
-        <div className="todoL ist">
+        <div className="todoList">
             <div className="taskItem">
                 <h5>
                     <EditableSpan />
