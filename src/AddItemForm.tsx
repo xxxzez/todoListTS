@@ -13,7 +13,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
             props.addItem(title)
             setTitle('')
         } else {
-            setError('Title is required')
+            setError('Title is required!')
         }
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
@@ -32,10 +32,7 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
                 onKeyPress={onKeyPressHandler}
             />
             {error && <div className="error-message">{error}</div>}
-            <button
-                className="waves-effect waves-light btn"
-                onClick={addItem}
-            >
+            <button className="waves-effect waves-light btn" onClick={addItem}>
                 Add task
             </button>
         </div>
