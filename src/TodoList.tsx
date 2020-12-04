@@ -108,7 +108,7 @@ function TodoList(props: PropsType) {
                     className="waves-effect waves-light btn"
                     onClick={onCompletedClickHandler}
                 >
-                    Completed
+                    Done
                 </button>
             </div>
         </div>
