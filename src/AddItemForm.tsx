@@ -1,4 +1,5 @@
-import Button from '@material-ui/core/Button/Button'
+import { IconButton, TextField } from '@material-ui/core'
+import { ControlPoint } from '@material-ui/icons'
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import './App.css'
 
@@ -27,15 +28,22 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     }
     return (
         <div>
-            <input
+            <TextField
+                error={!!error}
+                helperText={error}
+                label={'Type here'}
+                variant={'outlined'}
                 value={title}
                 onChange={onChangeHandler}
                 onKeyPress={onKeyPressHandler}
             />
-            {error && <div className="error-message">{error}</div>}
-            <Button variant={"contained"} color={"primary"} className="waves-effect waves-light btn" onClick={addItem}>
-                Add task
-            </Button>
+            <IconButton
+                color={'primary'}
+                className="waves-effect waves-light btn"
+                onClick={addItem}
+            >
+                <ControlPoint />
+            </IconButton>
         </div>
     )
 }

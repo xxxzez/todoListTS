@@ -1,5 +1,6 @@
 import { IconButton } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
+import { Checkbox } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete'
 import React, { ChangeEvent } from 'react'
 import { AddItemForm } from './AddItemForm'
@@ -47,13 +48,7 @@ function TodoList(props: PropsType) {
         return (
             <li key={task.id}>
                 <div className="taskItem">
-                    <label className={task.isDone ? 'is-done' : ''}>
-                        <input
-                            type="checkbox"
-                            checked={task.isDone}
-                            onChange={changeCheckbox}
-                        />
-                    </label>
+                    <Checkbox checked={task.isDone} onChange={changeCheckbox} />
                     <EditableSpan
                         title={task.title}
                         onChange={onChangeTitleHandler}
@@ -84,19 +79,21 @@ function TodoList(props: PropsType) {
             <ul>{tasks}</ul>
             <div className="filterButtons">
                 <Button
-                    className="waves-effect waves-light btn"
+                    variant={props.filter === 'all' ? 'contained' : 'text'}
                     onClick={onAllClickHandler}
                 >
                     All
                 </Button>
                 <Button
-                    className="waves-effect waves-light btn"
+                    variant={props.filter === 'active' ? 'contained' : 'text'}
                     onClick={onActiveClickHandler}
                 >
                     Active
                 </Button>
                 <Button
-                    className="waves-effect waves-light btn"
+                    variant={
+                        props.filter === 'completed' ? 'contained' : 'text'
+                    }
                     onClick={onCompletedClickHandler}
                 >
                     Done
