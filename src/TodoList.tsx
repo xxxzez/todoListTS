@@ -14,6 +14,8 @@ type PropsType = {
     changeFilter: (newFilterValue: FilterValuesType, todoListID: string) => void
     addTask: (title: string, todoListID: string) => void
     changeTaskStatus: (id: string, isDone: boolean, todoListID: string) => void
+    changeTaskTitle: (id: string, newTitle: string, todoListID: string) => void
+    changeTodoListTitle: (is: string, newTitle: string) => void
     removeTodoList: (id: string) => void
 }
 
@@ -28,11 +30,16 @@ function TodoList(props: PropsType) {
     const addTask = (title: string) => {
         props.addTask(title, props.id)
     }
-
+    const changeTodoListTitle = (newTitle: string) => {
+        props.changeTodoListTitle(props.id, newTitle)
+    }
     const tasks = props.tasks.map((task) => {
         const onClickHandler = () => props.removeTask(task.id, props.id)
         const changeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
             props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
+        }
+        const onChangeTitleHandler = (newValue: string) => {
+            props.changeTaskTitle(task.id, newValue, props.id)
         }
         return (
             <li key={task.id}>
@@ -44,7 +51,7 @@ function TodoList(props: PropsType) {
                             onChange={changeCheckbox}
                         />
                     </label>
-                    <EditableSpan title={task.title} />
+                    <EditableSpan title={task.title} onChange={onChangeTitleHandler} />
                     <div>
                         <button
                             className="waves-effect waves-light btn"
@@ -60,9 +67,9 @@ function TodoList(props: PropsType) {
     return (
         <div className="todoList">
             <div className="taskItem">
-                <h5>
-                    <EditableSpan title={props.title} />
-                </h5>
+                <h3>
+                    <EditableSpan title={props.title} onChange={changeTodoListTitle} />
+                </h3>
                 <button
                     className="waves-effect waves-light btn"
                     onClick={deleteTodoList}
