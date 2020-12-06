@@ -1,3 +1,4 @@
+import Button from '@material-ui/core/Button/Button'
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import './App.css'
 
@@ -32,9 +33,9 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
                 onKeyPress={onKeyPressHandler}
             />
             {error && <div className="error-message">{error}</div>}
-            <button className="waves-effect waves-light btn" onClick={addItem}>
+            <Button variant={"contained"} color={"primary"} className="waves-effect waves-light btn" onClick={addItem}>
                 Add task
-            </button>
+            </Button>
         </div>
     )
 }

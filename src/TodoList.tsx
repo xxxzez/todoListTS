@@ -1,7 +1,10 @@
+import { IconButton } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import DeleteIcon from '@material-ui/icons/Delete'
 import React, { ChangeEvent } from 'react'
-import './App.css'
-import { TaskType, FilterValuesType } from './App'
 import { AddItemForm } from './AddItemForm'
+import { FilterValuesType, TaskType } from './App'
+import './App.css'
 import { EditableSpan } from './EditableSpan'
 
 type PropsType = {
@@ -51,14 +54,14 @@ function TodoList(props: PropsType) {
                             onChange={changeCheckbox}
                         />
                     </label>
-                    <EditableSpan title={task.title} onChange={onChangeTitleHandler} />
+                    <EditableSpan
+                        title={task.title}
+                        onChange={onChangeTitleHandler}
+                    />
                     <div>
-                        <button
-                            className="waves-effect waves-light btn"
-                            onClick={onClickHandler}
-                        >
-                            x
-                        </button>
+                        <IconButton onClick={onClickHandler}>
+                            <DeleteIcon />
+                        </IconButton>
                     </div>
                 </div>
             </li>
@@ -68,36 +71,36 @@ function TodoList(props: PropsType) {
         <div className="todoList">
             <div className="taskItem">
                 <h3>
-                    <EditableSpan title={props.title} onChange={changeTodoListTitle} />
+                    <EditableSpan
+                        title={props.title}
+                        onChange={changeTodoListTitle}
+                    />
                 </h3>
-                <button
-                    className="waves-effect waves-light btn"
-                    onClick={deleteTodoList}
-                >
-                    x
-                </button>
+                <IconButton onClick={deleteTodoList}>
+                    <DeleteIcon />
+                </IconButton>
             </div>
             <AddItemForm addItem={addTask} />
             <ul>{tasks}</ul>
             <div className="filterButtons">
-                <button
+                <Button
                     className="waves-effect waves-light btn"
                     onClick={onAllClickHandler}
                 >
                     All
-                </button>
-                <button
+                </Button>
+                <Button
                     className="waves-effect waves-light btn"
                     onClick={onActiveClickHandler}
                 >
                     Active
-                </button>
-                <button
+                </Button>
+                <Button
                     className="waves-effect waves-light btn"
                     onClick={onCompletedClickHandler}
                 >
                     Done
-                </button>
+                </Button>
             </div>
         </div>
     )
