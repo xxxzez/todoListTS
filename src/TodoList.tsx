@@ -1,6 +1,6 @@
 import { IconButton } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
-import { Checkbox } from '@material-ui/core';
+import { Checkbox } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import React, { ChangeEvent } from 'react'
 import { AddItemForm } from './AddItemForm'
@@ -46,37 +46,35 @@ function TodoList(props: PropsType) {
             props.changeTaskTitle(task.id, newValue, props.id)
         }
         return (
-            <li key={task.id}>
+            <div key={task.id}>
                 <div className="taskItem">
                     <Checkbox checked={task.isDone} onChange={changeCheckbox} />
                     <EditableSpan
                         title={task.title}
                         onChange={onChangeTitleHandler}
                     />
-                    <div>
-                        <IconButton onClick={onClickHandler}>
-                            <DeleteIcon />
-                        </IconButton>
-                    </div>
+
+                    <IconButton onClick={onClickHandler}>
+                        <DeleteIcon />
+                    </IconButton>
                 </div>
-            </li>
+            </div>
         )
     })
     return (
         <div className="todoList">
-            <div className="taskItem">
-                <h3>
-                    <EditableSpan
-                        title={props.title}
-                        onChange={changeTodoListTitle}
-                    />
-                </h3>
+            <h3>
+                <EditableSpan
+                    title={props.title}
+                    onChange={changeTodoListTitle}
+                />
                 <IconButton onClick={deleteTodoList}>
                     <DeleteIcon />
                 </IconButton>
-            </div>
+            </h3>
+
             <AddItemForm addItem={addTask} />
-            <ul>{tasks}</ul>
+            <div>{tasks}</div>
             <div className="filterButtons">
                 <Button
                     variant={props.filter === 'all' ? 'contained' : 'text'}
