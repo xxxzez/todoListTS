@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent } from 'react'
 import './App.css'
 import { TaskType, FilterValuesType } from './App'
 import { AddItemForm } from './AddItemForm'
+import { EditableSpan } from './EditableSpan'
 
 type PropsType = {
     key: string
@@ -28,26 +29,6 @@ function TodoList(props: PropsType) {
         props.addTask(title, props.id)
     }
 
-    const EditableSpan = () => {
-        const [editMode, setEditMode] = useState(false)
-        const [title, setTitle] = useState(props.title)
-        const changeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-            setTitle(e.currentTarget.value)
-        }
-        const activateViewMode = () => {
-            setEditMode(false)
-        }
-        return editMode ? (
-            <input
-                value={title}
-                autoFocus
-                onChange={changeTitle}
-                onBlur={activateViewMode}
-            />
-        ) : (
-            <span onClick={() => setEditMode(true)}>{title}</span>
-        )
-    }
     const tasks = props.tasks.map((task) => {
         const onClickHandler = () => props.removeTask(task.id, props.id)
         const changeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +44,7 @@ function TodoList(props: PropsType) {
                             onChange={changeCheckbox}
                         />
                     </label>
-                    <EditableSpan />
+                    <EditableSpan title={task.title} />
                     <div>
                         <button
                             className="waves-effect waves-light btn"
@@ -80,7 +61,7 @@ function TodoList(props: PropsType) {
         <div className="todoList">
             <div className="taskItem">
                 <h5>
-                    <EditableSpan />
+                    <EditableSpan title={props.title} />
                 </h5>
                 <button
                     className="waves-effect waves-light btn"
