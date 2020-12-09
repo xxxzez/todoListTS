@@ -44,7 +44,7 @@ test('correct todolist should change its name', () => {
         {id: todolist2, title: 'What to buy', filter: 'all'}
     ]
     const action = {
-        type: 'CHANGE-TODOLIST-TITLE',
+        type: 'CHANGE-TODOLIST-TITLE' as const,
         id: todolist2,
         title: newTodoListTitle
     }
@@ -64,7 +64,7 @@ test('correct filter of todolist should be changed', () => {
         {id: todolist2, title: 'What to buy', filter: 'all'}
     ]
     const action = {
-        type: 'CHANGE-TODOLIST-FILTER',
+        type: 'CHANGE-TODOLIST-FILTER' as const,
         id: todolist2,
         filter: newFilter
     }
