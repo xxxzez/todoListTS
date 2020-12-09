@@ -98,7 +98,7 @@ function App() {
         }
     }
 
-    type TodoListsType = {
+    export type TodoListsType = {
         id: string
         title: string
         filter: FilterValuesType
@@ -176,7 +176,7 @@ function App() {
                             )
                         }
                         return (
-                            <Grid item >
+                            <Grid item>
                                 <Paper style={{ padding: '15px' }}>
                                     <TodoList
                                         changeTaskTitle={changeTaskTitle}
