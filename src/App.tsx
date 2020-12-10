@@ -31,6 +31,7 @@ export type TodoListsType = {
     title: string
     filter: FilterValuesType
 }
+
 function App() {
     const removeTask = (taskID: string, todoListID: string) => {
         const todoListTasks = tasks[todoListID]
