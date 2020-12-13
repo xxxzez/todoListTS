@@ -32,3 +32,5 @@ export function EditableSpan(props: EditableSpanPropsType) {
         <span onClick={activateEditMode}>{props.title}</span>
     )
 }
+
+ export const EditableSpanMemo = React.memo(EditableSpan)

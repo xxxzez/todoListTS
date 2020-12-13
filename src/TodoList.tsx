@@ -6,7 +6,7 @@ import React, { ChangeEvent } from 'react'
 import { AddItemForm } from './AddItemForm'
 import { FilterValuesType, TaskType } from './App'
 import './App.css'
-import { EditableSpan } from './EditableSpan'
+import { EditableSpanMemo } from './EditableSpan'
 
 type PropsType = {
     key: string
@@ -49,7 +49,7 @@ function TodoList(props: PropsType) {
             <div key={task.id}>
                 <div className="taskItem">
                     <Checkbox checked={task.isDone} onChange={changeCheckbox} />
-                    <EditableSpan
+                    <EditableSpanMemo
                         title={task.title}
                         onChange={onChangeTitleHandler}
                     />
@@ -64,7 +64,7 @@ function TodoList(props: PropsType) {
     return (
         <div className="todoList">
             <h3>
-                <EditableSpan
+                <EditableSpanMemo
                     title={props.title}
                     onChange={changeTodoListTitle}
                 />
