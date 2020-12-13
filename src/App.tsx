@@ -11,9 +11,9 @@ import {
 import { Menu } from '@material-ui/icons'
 import React, { useState } from 'react'
 import { v1 } from 'uuid'
-import { AddItemForm } from './AddItemForm'
+import { AddItemFormMemo } from './AddItemForm'
 import './App.css'
-import TodoList from './TodoList'
+import TodoListMemo from './TodoList'
 
 export type TaskType = {
     id: string
@@ -160,7 +160,7 @@ function App() {
             </AppBar>
             <Container fixed>
                 <Grid container style={{ padding: '20px' }}>
-                    <AddItemForm addItem={addTodoList} />
+                    <AddItemFormMemo addItem={addTodoList} />
                 </Grid>
                 <Grid container spacing={3}>
                     {todoLists.map((tl) => {
@@ -178,7 +178,7 @@ function App() {
                         return (
                             <Grid item>
                                 <Paper style={{ padding: '15px' }}>
-                                    <TodoList
+                                    <TodoListMemo
                                         changeTaskTitle={changeTaskTitle}
                                         key={tl.id}
                                         filter={tl.filter}

@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import { Checkbox } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import React, { ChangeEvent } from 'react'
-import { AddItemForm } from './AddItemForm'
+import { AddItemFormMemo } from './AddItemForm'
 import { FilterValuesType, TaskType } from './App'
 import './App.css'
 import { EditableSpanMemo } from './EditableSpan'
@@ -73,7 +73,7 @@ function TodoList(props: PropsType) {
                 </IconButton>
             </h3>
 
-            <AddItemForm addItem={addTask} />
+            <AddItemFormMemo addItem={addTask} />
             <div>{tasks}</div>
             <div className="filterButtons">
                 <Button
@@ -102,3 +102,5 @@ function TodoList(props: PropsType) {
 }
 
 export default TodoList
+
+export const TodoListMemo = React.memo(TodoList)

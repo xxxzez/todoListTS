@@ -47,3 +47,5 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
         </div>
     )
 }
+
+export const AddItemFormMemo = React.memo(AddItemForm)
