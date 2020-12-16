@@ -11,6 +11,7 @@ import {
 import { Menu } from '@material-ui/icons'
 
 import React, { useReducer } from 'react'
+import { useDispatch } from 'react-redux'
 import { v1 } from 'uuid'
 import { AddItemFormMemo } from './AddItemForm'
 import './App.css'
@@ -48,48 +49,60 @@ export type TodoListsType = {
 }
 
 function AppWithRedux() {
+
+    const dispatch = useDispatch()
+
     const removeTask = (taskID: string, todoListID: string) => {
-        dispatchToTasks(removeTaskAC(taskID, todoListID))
+        dispatch(removeTaskAC(taskID, todoListID))
     }
+
     const changeFilter = (
         newFilterValue: FilterValuesType,
         todoListID: string
     ) => {
-        dispatchToTodolist(changeTodolistFilterAC(todoListID, newFilterValue))
+        dispatch(changeTodolistFilterAC(todoListID, newFilterValue))
     }
+
     const addTask = (title: string, todoListID: string) => {
-        dispatchToTasks(addTaskAC(title, todoListID))
+        dispatch(addTaskAC(title, todoListID))
     }
+
     const changeTaskStatus = (
         id: string,
         isDone: boolean,
         todoListID: string
     ) => {
-        dispatchToTasks(changeTaskStatusAC(id, isDone, todoListID))
+        dispatch(changeTaskStatusAC(id, isDone, todoListID))
     }
+
     const changeTaskTitle = (
         id: string,
         newTitle: string,
         todoListID: string
     ) => {
-        dispatchToTasks(changeTaskTitleAC(id, newTitle, todoListID))
+        dispatch(changeTaskTitleAC(id, newTitle, todoListID))
     }
+
     const addTodoList = (title: string) => {
         const action = addTodolistAC(title)
-        dispatchToTasks(action)
-        dispatchToTodolist(action)
+        dispatch(action)
     }
+
     const removeTodoList = (id: string) => {
-        dispatchToTodolist(removeTodolistAC(id))
+        const action = removeTodolistAC(id)
+        dispatch(action)
     }
+
     const changeTodoListTitle = (id: string, newTitle: string) => {
-        dispatchToTodolist(changeTodolistTitleAC(id, newTitle))
+        dispatch(changeTodolistTitleAC(id, newTitle))
     }
+
+
 
     const todoList1 = v1()
     const todoList2 = v1()
 
-    const [todoLists, dispatchToTodolist] = useReducer(todoListsReducer, [
+    const [todoLists] = useReducer(todoListsReducer, [
         {
             id: todoList1,
             title: 'For today',
@@ -102,7 +115,7 @@ function AppWithRedux() {
         },
     ])
 
-    const [tasks, dispatchToTasks] = useReducer(tasksReducer, {
+    const [tasks] = useReducer(tasksReducer, {
         [todoList1]: [
             { id: v1(), title: 'React', isDone: false },
             { id: v1(), title: 'HTML', isDone: true },
