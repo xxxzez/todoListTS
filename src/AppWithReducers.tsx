@@ -47,7 +47,7 @@ export type TodoListsType = {
     filter: FilterValuesType
 }
 
-function App() {
+function AppWithRedux() {
     const removeTask = (taskID: string, todoListID: string) => {
         dispatchToTasks(removeTaskAC(taskID, todoListID))
     }
@@ -172,4 +172,4 @@ function App() {
     )
 }
 
-export default App
+export default AppWithRedux
