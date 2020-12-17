@@ -9,25 +9,22 @@ import {
     Typography,
 } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
-
-import React, { useReducer } from 'react'
-import { useDispatch } from 'react-redux'
-import { v1 } from 'uuid'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { AddItemFormMemo } from './AddItemForm'
 import './App.css'
+import { AppRootStateType } from './state/store'
 import {
     addTaskAC,
     changeTaskStatusAC,
     changeTaskTitleAC,
     removeTaskAC,
-    tasksReducer,
 } from './state/tasks-reducer'
 import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     removeTodolistAC,
-    todoListsReducer,
 } from './state/todolists-reducer'
 import TodoListMemo from './TodoList'
 
@@ -49,8 +46,13 @@ export type TodoListsType = {
 }
 
 function AppWithRedux() {
-
     const dispatch = useDispatch()
+    const todolists = useSelector<AppRootStateType, Array<TodoListsType>>(
+        (state) => state.todolists
+    )
+    const tasks = useSelector<AppRootStateType, TasksStateType>(
+        (state) => state.tasks
+    )
 
     const removeTask = (taskID: string, todoListID: string) => {
         dispatch(removeTaskAC(taskID, todoListID))
@@ -97,37 +99,6 @@ function AppWithRedux() {
         dispatch(changeTodolistTitleAC(id, newTitle))
     }
 
-
-
-    const todoList1 = v1()
-    const todoList2 = v1()
-
-    const [todoLists] = useReducer(todoListsReducer, [
-        {
-            id: todoList1,
-            title: 'For today',
-            filter: 'all',
-        },
-        {
-            id: todoList2,
-            title: 'For tomorrow',
-            filter: 'all',
-        },
-    ])
-
-    const [tasks] = useReducer(tasksReducer, {
-        [todoList1]: [
-            { id: v1(), title: 'React', isDone: false },
-            { id: v1(), title: 'HTML', isDone: true },
-            { id: v1(), title: 'CSS', isDone: true },
-        ],
-        [todoList2]: [
-            { id: v1(), title: 'Hooks', isDone: false },
-            { id: v1(), title: 'TypeScript', isDone: true },
-            { id: v1(), title: 'Redux', isDone: false },
-        ],
-    })
-
     return (
         <div className="App">
             <AppBar position="static">
@@ -144,7 +115,7 @@ function AppWithRedux() {
                     <AddItemFormMemo addItem={addTodoList} />
                 </Grid>
                 <Grid container spacing={3}>
-                    {todoLists.map((tl) => {
+                    {todolists.map((tl) => {
                         const allTodoListTasks = tasks[tl.id]
                         let tasksForTodoList = allTodoListTasks
                         if (tl.filter === 'active') {
