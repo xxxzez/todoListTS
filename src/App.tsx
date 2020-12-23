@@ -45,7 +45,7 @@ export type TodoListsType = {
     filter: FilterValuesType
 }
 
-export const App = React.memo(() => {
+export const App = () => {
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodoListsType>>(
         (state) => state.todolists
@@ -60,7 +60,7 @@ export const App = React.memo(() => {
     ) {
         dispatch(removeTaskAC(taskID, todoListID))
     },
-    [])
+    [dispatch])
 
     const changeFilter = useCallback(function (
         newFilterValue: FilterValuesType,
@@ -68,11 +68,11 @@ export const App = React.memo(() => {
     ) {
         dispatch(changeTodolistFilterAC(todoListID, newFilterValue))
     },
-    [])
+    [dispatch])
 
     const addTask = useCallback(function (title: string, todoListID: string) {
         dispatch(addTaskAC(title, todoListID))
-    }, [])
+    }, [dispatch])
 
     const changeTaskStatus = useCallback(function (
         id: string,
@@ -81,7 +81,7 @@ export const App = React.memo(() => {
     ) {
         dispatch(changeTaskStatusAC(id, isDone, todoListID))
     },
-    [])
+    [dispatch])
 
     const changeTaskTitle = useCallback(function (
         id: string,
@@ -90,17 +90,15 @@ export const App = React.memo(() => {
     ) {
         dispatch(changeTaskTitleAC(id, newTitle, todoListID))
     },
-    [])
+    [dispatch])
 
     const addTodoList = useCallback(function (title: string) {
-        const action = addTodolistAC(title)
-        dispatch(action)
-    }, [])
+        dispatch(addTodolistAC(title))
+    }, [dispatch])
 
     const removeTodoList = useCallback(function (id: string) {
-        const action = removeTodolistAC(id)
-        dispatch(action)
-    }, [])
+        dispatch(removeTodolistAC(id))
+    }, [dispatch])
 
     const changeTodoListTitle = useCallback(function (
         id: string,
@@ -108,7 +106,7 @@ export const App = React.memo(() => {
     ) {
         dispatch(changeTodolistTitleAC(id, newTitle))
     },
-    [])
+    [dispatch])
 
     return (
         <div className="App">
@@ -127,7 +125,9 @@ export const App = React.memo(() => {
                 </Grid>
                 <Grid container spacing={3}>
                     {todolists.map((tl) => {
-                        let tasksForTodoList = tasks[tl.id]
+                        let allTodolistTasks = tasks[tl.id]
+                        let tasksForTodoList = allTodolistTasks
+
                         return (
                             <Grid item>
                                 <Paper style={{ padding: '15px' }}>
@@ -155,4 +155,4 @@ export const App = React.memo(() => {
             </Container>
         </div>
     )
-})
+}
