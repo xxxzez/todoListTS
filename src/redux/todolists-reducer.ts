@@ -1,4 +1,4 @@
-import { FilterValuesType } from './../App'
+import { FilterValuesType } from '../App'
 import { v1 } from 'uuid'
 import { TodoListsType } from '../App'
 

@@ -3,10 +3,10 @@ import Button from '@material-ui/core/Button'
 import { Checkbox } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import React, { ChangeEvent } from 'react'
-import { AddItemFormMemo } from './AddItemForm'
 import { FilterValuesType, TaskType } from './App'
 import './App.css'
-import { EditableSpanMemo } from './EditableSpan'
+import { EditableSpan } from './EditableSpan'
+import { AddItemForm } from './AddItemForm'
 
 type PropsType = {
     key: string
@@ -23,7 +23,7 @@ type PropsType = {
     removeTodoList: (id: string) => void
 }
 
-function TodoList(props: PropsType) {
+export const TodoList = React.memo((props: PropsType) => {
     const onAllClickHandler = () => props.changeFilter('all', props.id)
     const onCompletedClickHandler = () =>
         props.changeFilter('completed', props.id)
@@ -38,6 +38,7 @@ function TodoList(props: PropsType) {
         props.changeTodoListTitle(props.id, newTitle)
     }
     const tasks = props.tasks.map((task) => {
+        
         const onClickHandler = () => props.removeTask(task.id, props.id)
         const changeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
             props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
@@ -49,7 +50,7 @@ function TodoList(props: PropsType) {
             <div key={task.id}>
                 <div className="taskItem">
                     <Checkbox checked={task.isDone} onChange={changeCheckbox} />
-                    <EditableSpanMemo
+                    <EditableSpan
                         title={task.title}
                         onChange={onChangeTitleHandler}
                     />
@@ -61,10 +62,20 @@ function TodoList(props: PropsType) {
             </div>
         )
     })
+    let tasksForTodoList = props.tasks
+    if (props.filter === 'active') {
+        tasksForTodoList = props.tasks.filter(
+            (task) => task.isDone === false
+        )
+    } else if (props.filter === 'completed') {
+        tasksForTodoList = props.tasks.filter(
+            (task) => task.isDone === true
+        )
+    }
     return (
         <div className="todoList">
             <h3>
-                <EditableSpanMemo
+                <EditableSpan
                     title={props.title}
                     onChange={changeTodoListTitle}
                 />
@@ -73,7 +84,7 @@ function TodoList(props: PropsType) {
                 </IconButton>
             </h3>
 
-            <AddItemFormMemo addItem={addTask} />
+            <AddItemForm addItem={addTask} />
             <div>{tasks}</div>
             <div className="filterButtons">
                 <Button
@@ -99,8 +110,4 @@ function TodoList(props: PropsType) {
             </div>
         </div>
     )
-}
-
-export default TodoList
-
-export const TodoListMemo = React.memo(TodoList)
+})
