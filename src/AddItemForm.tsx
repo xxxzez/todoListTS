@@ -21,7 +21,10 @@ export const AddItemForm = (props: AddItemFormPropsType) => {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) =>
         setTitle(e.currentTarget.value)
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
+        if (error !== null) {
+            setError(null)
+        }
+
         if (e.charCode === 13) {
             addItem()
         }
