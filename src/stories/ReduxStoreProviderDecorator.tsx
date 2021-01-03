@@ -11,8 +11,8 @@ const rootReducer = combineReducers({
     todolists: todoListsReducer,
 })
 
-export const todoList1 = v1()
-export const todoList2 = v1()
+const todoList1 = v1()
+const todoList2 = v1()
 const initialGlobalState = {
     todolists: [
         {
