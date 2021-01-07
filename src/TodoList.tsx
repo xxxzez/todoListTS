@@ -95,7 +95,7 @@ export const TodoList = React.memo((props: PropsType) => {
                     variant={props.filter === 'active' ? 'contained' : 'text'}
                     onClick={onActiveClickHandler}
                 >
-                    Active
+                    Active Task
                 </Button>
                 <Button
                     variant={
