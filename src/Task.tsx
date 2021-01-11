@@ -9,7 +9,7 @@ type TaskPropsType = {
     changeTaskStatus: (id: string, isDone: boolean, todoListID: string) => void
     changeTaskTitle: (id: string, newTitle: string, todoListID: string) => void
     task: TaskType
-    todolistId: string
+    todolistId: string | null
 }
 export const Task = React.memo((props: TaskPropsType) => {
     const onClickHandler = () =>
