@@ -116,7 +116,7 @@ export const App = () => {
                         <Menu />
                     </IconButton>
                     <Typography variant="h6">News</Typography>
-                    <Button color="inherit">Log in</Button>
+                    <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
             <Container fixed>
