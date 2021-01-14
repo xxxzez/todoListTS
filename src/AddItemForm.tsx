@@ -3,7 +3,7 @@ import { ControlPoint } from '@material-ui/icons'
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
 import './App.css'
 
-type AddItemFormPropsType = {
+export type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
