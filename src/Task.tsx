@@ -21,6 +21,7 @@ export const Task = React.memo((props: TaskPropsType) => {
             props.todolistId
         )
     }
+
     const onChangeTitleHandler = useCallback(
         (newValue: string) => {
             props.changeTaskTitle(props.task.id, newValue, props.todolistId)
