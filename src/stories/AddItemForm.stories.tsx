@@ -5,7 +5,7 @@ import { AddItemForm, AddItemFormPropsType } from '../AddItemForm'
 import {action} from '@storybook/addon-actions'
 
 export default {
-    title: 'Example/AddItemForm',
+    title: 'Todolist/AddItemForm',
     component: AddItemForm,
     argTypes: {
         onClick: { description: 'AddItemFormExample clicked' },
