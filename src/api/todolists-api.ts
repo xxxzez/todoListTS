@@ -7,7 +7,7 @@ export type TodoListType = {
     order: number
 }
 
-type ResponseType<D> = {
+type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
     data: D
@@ -39,41 +39,34 @@ const settings = {
     },
 }
 
+const instance = axios.create({
+    baseURL: 'https://social-network.samuraijs.com/api/1.1/',
+    ...settings,
+})
+
 export const todolistsAPI = {
     getTodolists() {
-        return axios.get<Array<TodoListType>>(
-            'https://social-network.samuraijs.com/api/1.1/todo-lists',
-            settings
-        )
+        return instance.get<Array<TodoListType>>('todo-lists')
     },
     createTodolist(title: string) {
-        return axios.post<
+        return instance.post<
             ResponseType<{
                 item: TodoListType
             }>
-        >(
-            'https://social-network.samuraijs.com/api/1.1/todo-lists',
-            { title: title },
-            settings
-        )
+        >('todo-lists', { title: title })
     },
     deleteTodolist(id: string) {
-        return axios.delete<ResponseType<{}>>(
-            `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`,
-            settings
-        )
+        return instance.delete<ResponseType>(`todo-lists/${id}`)
     },
     updateTodolist(id: string, title: string) {
-        return axios.put<ResponseType<{}>>(
-            `https://social-network.samuraijs.com/api/1.1/todo-lists/${id}`,
-            { title: title },
-            settings
-        )
+        return instance.put<ResponseType>(`todo-lists/${id}`, {
+            title: title,
+        })
     },
     getTasks(todolistId: string) {
-        return axios.get(
-            `https://social-network.samuraijs.com/api/1.1/todo-lists/${todolistId}/tasks`,
-            settings
-        )
+        return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
+    },
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
 }
