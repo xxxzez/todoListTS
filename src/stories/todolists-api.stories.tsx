@@ -1,17 +1,8 @@
-import axios from 'axios'
-import { title } from 'process'
 import React, { useEffect, useState } from 'react'
 import { todolistsAPI } from '../api/todolists-api'
 
 export default {
     title: 'API',
-}
-
-const settings = {
-    withCredentials: true,
-    headers: {
-        'API-KEY': '06e5810a-0410-4b5f-98c9-d18a1ae87df4',
-    },
 }
 
 export const GetTodolists = () => {
