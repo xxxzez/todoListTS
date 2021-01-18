@@ -1,6 +1,7 @@
 describe('addItemForm', () => {
     it('base example, visually looks correct', async () => {
         // APIs from jest-puppeteer
+        /* eslint-disable */
         await page.goto(
             'http://localhost:9009/iframe.html?id=todolist-additemform--add-item-form-example&viewMode=story'
         )
@@ -8,6 +9,6 @@ describe('addItemForm', () => {
 
         // API from jest-image-snapshot
         expect(image).toMatchImageSnapshot()
+        /* eslint-enable */
     })
 })
- 
