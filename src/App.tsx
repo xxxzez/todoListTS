@@ -12,6 +12,7 @@ import { Menu } from '@material-ui/icons'
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AddItemForm } from './AddItemForm'
+import { TaskType } from './api/todolists-api'
 import './App.css'
 import { AppRootStateType } from './redux/store'
 import {
@@ -24,16 +25,12 @@ import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    fetchTodolistsThunk,
+    fetchTodolistsTC,
     removeTodolistAC,
 } from './redux/todolists-reducer'
 import { TodoList } from './TodoList'
 
-export type TaskType = {
-    id: string
-    title: string
-    isDone: boolean
-}
+
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
@@ -56,7 +53,7 @@ export const App = () => {
     )
 
     useEffect(() => {
-        dispatch(fetchTodolistsThunk)
+        dispatch(fetchTodolistsTC())
     }, [])
 
     const removeTask = useCallback(
