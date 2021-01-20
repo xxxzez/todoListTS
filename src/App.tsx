@@ -56,8 +56,8 @@ export const App = () => {
     )
 
     useEffect(() => {
-        fetchTodolistsThunk(dispatch)
-    })
+        dispatch(fetchTodolistsThunk)
+    }, [])
 
     const removeTask = useCallback(
         function (taskID: string, todoListID: string) {
