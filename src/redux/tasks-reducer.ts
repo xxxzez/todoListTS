@@ -1,11 +1,11 @@
+import { Dispatch } from 'redux'
 import { v1 } from 'uuid'
-import { TasksStateType, TaskType } from '../App'
+import { TaskPriorities, TaskStatuses, TaskType, todolistsAPI } from '../api/todolists-api'
+import { TasksStateType } from '../App'
 import {
     AddTodolistActionType,
     RemoveTodolistActionType,
     SetTodolistsActionType,
-    todoList1,
-    todoList2,
 } from './todolists-reducer'
 
 export type SetTasksActionType = {
@@ -71,7 +71,14 @@ export const tasksReducer = (
             const newTask = {
                 id: v1(),
                 title: action.title,
-                isDone: false,
+                status: TaskStatuses.New,
+                todoListId: action.todolistId,
+                description: '',
+                startDate: '',
+                deadline: '',
+                addedDate: '',
+                order: 0,
+                priority: TaskPriorities.Low,
             }
             const newTasks = [newTask, ...tasks]
             stateCopy[action.todolistId] = newTasks
@@ -143,4 +150,12 @@ export const setTasksAC = (
     todolistId: string
 ): SetTasksActionType => {
     return { type: 'SET-TASKS', tasks: tasks, todolistId: todolistId }
+}
+
+export const fetchTasksTC = (todolistId: string) => {
+    return (dispatch: Dispatch) => {
+        todolistsAPI.getTasks(todolistId).then((res) => {
+            dispatch(setTasksAC(res.data.items, todolistId))
+        })
+    }
 }
