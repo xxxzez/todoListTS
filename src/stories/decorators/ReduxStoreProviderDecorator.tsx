@@ -1,12 +1,8 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { combineReducers, createStore } from 'redux'
-<<<<<<< HEAD
 import { v1 } from 'uuid'
 import { TaskPriorities, TaskStatuses } from '../../api/todolists-api'
-=======
->>>>>>> 1272cdd4f92a91d7537fbe2cc1bf68997fabf062
-import { AppRootStateType } from '../../redux/store'
 import { tasksReducer } from '../../redux/tasks-reducer'
 import { todoListsReducer } from '../../redux/todolists-reducer'
 
@@ -14,9 +10,6 @@ const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todoListsReducer,
 })
-const todoList1 = v1()
-const todoList2 = v1()
-
 const initialGlobalState: any = {
     todolists: [
         {
