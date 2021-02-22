@@ -6,13 +6,11 @@ export type TodoListType = {
     addedDate: string
     order: number
 }
-
 type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
     data: D
 }
-
 type GetTasksResponse = {
     error: string | null
     totalCount: number
@@ -43,19 +41,16 @@ export type TaskType = {
     order: number
     addedDate: string
 }
-
 const settings = {
     withCredentials: true,
     headers: {
         'API-KEY': '06e5810a-0410-4b5f-98c9-d18a1ae87df4',
     },
 }
-
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
     ...settings,
 })
-
 export const todolistsAPI = {
     getTodolists() {
         return instance.get<Array<TodoListType>>('todo-lists')
