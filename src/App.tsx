@@ -46,6 +46,7 @@ export type TodoListsType = {
     title: string
     filter: FilterValuesType
 }
+// App
 
 export const App = () => {
     const dispatch = useDispatch()
