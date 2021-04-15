@@ -46,6 +46,7 @@ export type TodoListsType = {
     title: string
     filter: FilterValuesType
 }
+
 // App
 
 export const App = () => {
@@ -136,7 +137,6 @@ export const App = () => {
                     {todolists.map((tl) => {
                         let allTodolistTasks = tasks[tl.id]
                         let tasksForTodoList = allTodolistTasks
-
                         return (
                             <Grid item>
                                 <Paper style={{ padding: '15px' }}>
